@@ -2,24 +2,42 @@ package cassebrique.models;
 
 import java.awt.*;
 
-public class Sprite{
+public abstract class Sprite {
 
     protected int x;
     protected int y;
-    protected Color couleurs = Color.RED;
-    protected int size;
+    protected Color couleur;
 
-    protected float ratioAleatoire(){
-        return (float)Math.random() * 0.6f + 0.1f;
+    public Sprite() {
     }
-    protected float ratioAleatoire(float max, float min){
-        return (float)Math.random() * max + min;
+
+    public Sprite(int x, int y, Color couleur) {
+        this.x = x;
+        this.y = y;
+        this.couleur = couleur;
     }
-    protected int nombreAleatoire(){
-        return (int) (Math.random() * 300 + 200);
+
+    public int getX() {
+        return x;
     }
-    protected int nombreAleatoire(int max, int min){
-        return (int) (Math.random() * max + min);
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public Color getCouleur() {
+        return couleur;
+    }
+
+    public void setCouleur(Color couleur) {
+        this.couleur = couleur;
     }
 }
-

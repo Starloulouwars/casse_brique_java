@@ -1,25 +1,29 @@
+
 package cassebrique.models;
-import cassebrique.CasseBrique;
-import cassebrique.models.Sprite;
 
 import java.awt.*;
 
-public class Brique extends Sprite{
+public class Brique extends Rectangle {
 
-    protected int sizex;
-    protected int sizey;
+    protected int resistance;
+    public static int hauteurDefaut = 40;
+    public static int largeurDefaut = 70;
 
-
-
-    public Brique (int x, int y){
-        this.sizex = 100;
-        this.sizey = 20;
+    public Brique(int x, int y, Color couleur, int resistance) {
+        super(x, y, largeurDefaut, hauteurDefaut , couleur);
+        this.resistance = resistance;
     }
 
-    public void dessinerRect(Graphics2D dessin){
-
-        dessin.setColor(couleurs);
-        dessin.fillRect(x,y, sizex, sizey);
+    public Brique(int x, int y, Color couleur) {
+        super(x, y, largeurDefaut, hauteurDefaut , couleur);
+        this.resistance = 1;
     }
 
+    public int getResistance() {
+        return resistance;
+    }
+
+    public void setResistance(int resistance) {
+        this.resistance = resistance;
+    }
 }
