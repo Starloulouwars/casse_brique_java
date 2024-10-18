@@ -87,7 +87,8 @@ public class CasseBrique extends Canvas implements KeyListener {
                 balle.dessiner(dessin);
                 if (Collisions.Col(balle.getX(), balle.getY(), balle.getDiametre(), balle.getDiametre(),
                         barre.getX(), barre.getY(), barre.getLargeurDefaut(), barre.getHauteurDefaut())) {
-                    balle.setVitesseY(-balle.getVitesseY());}
+                    balle.setVitesseY(-balle.getVitesseY());
+                    balle.setY(barre.getY() - balle.getDiametre());}
             }
 
             if (toucheDroite){
@@ -104,9 +105,23 @@ public class CasseBrique extends Canvas implements KeyListener {
                 for (Balle balle : listeBalle){
                     if (Collisions.Col(balle.getX(), balle.getY(), balle.getDiametre(), balle.getDiametre(),
                             brique.getX(), brique.getY(), brique.getLargeurDefaut(), brique.getHauteurDefaut())) {
+
                         balle.setVitesseY(-balle.getVitesseY());
+                        balle.setY(brique.getY() + balle.getDiametre());
                     }
 
+                }
+            }
+            for (int i = 0; i < listeBrique.size(); i++) {
+                Brique brique = listeBrique.get(i);
+                brique.dessiner(dessin);
+                for (Balle balle : listeBalle) {
+                    if (Collisions.Col(balle.getX(), balle.getY(), balle.getDiametre(), balle.getDiametre(),
+                            brique.getX(), brique.getY(), brique.getLargeurDefaut(), brique.getHauteurDefaut())) {
+                        listeBrique.remove(i);
+                        i--;
+                        break;
+                    }
                 }
             }
 

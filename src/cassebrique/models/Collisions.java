@@ -8,3 +8,4 @@ public class Collisions {
             yP < yD + hauteurD &&
             yP + hauteurP > yD);
 }}
+
