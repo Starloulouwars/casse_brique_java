@@ -10,14 +10,18 @@ public class Barre extends Rectangle {
     public static int hauteurDefaut = 30;
     public static int largeurDefaut = 200;
 
+    public Barre(int x, int y, int largeurDefaut, int hauteurDefaut) {
+        super(x, y, largeurDefaut, hauteurDefaut , Color.BLUE);
+        this.vitesse = 10;
+    }
     public Barre(int x, int y) {
         super(x, y, largeurDefaut, hauteurDefaut , Color.BLUE);
         this.vitesse = 10;
     }
     public void deplacerBarreD() {
         x += vitesse;
-        if (x > CasseBrique.LARGEUR - largeur){
-            x = CasseBrique.LARGEUR - largeur;
+        if (x > CasseBrique.LARGEUR - largeurDefaut){
+            x = CasseBrique.LARGEUR - largeurDefaut;
         }
 
     }
@@ -50,5 +54,9 @@ public class Barre extends Rectangle {
 
     public static void setLargeurDefaut(int largeurDefaut) {
         Barre.largeurDefaut = largeurDefaut;
+    }
+    public void dessiner(Graphics2D dessin) {
+        dessin.setColor(couleur);
+        dessin.fillRect(x,y,largeurDefaut,hauteurDefaut);
     }
 }

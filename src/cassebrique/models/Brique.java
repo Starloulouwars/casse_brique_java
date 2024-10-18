@@ -9,7 +9,7 @@ public class Brique extends Rectangle {
     public static int hauteurDefaut = 40;
     public static int largeurDefaut = 70;
 
-    public Brique(int x, int y, Color couleur, int resistance) {
+    public Brique(int x, int y, Color couleur, int largeurDefaut, int hauteurDefaut) {
         super(x, y, largeurDefaut, hauteurDefaut , couleur);
         this.resistance = resistance;
     }
@@ -41,5 +41,10 @@ public class Brique extends Rectangle {
 
     public static void setLargeurDefaut(int largeurDefaut) {
         Brique.largeurDefaut = largeurDefaut;
+    }
+
+    public void dessiner(Graphics2D dessin) {
+        dessin.setColor(couleur);
+        dessin.fillRect(x,y,largeurDefaut,hauteurDefaut);
     }
 }

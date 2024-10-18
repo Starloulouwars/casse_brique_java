@@ -1,9 +1,6 @@
 package cassebrique;
 
-import cassebrique.models.Balle;
-import cassebrique.models.Barre;
-import cassebrique.models.Brique;
-import cassebrique.models.Collisions;
+import cassebrique.models.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,6 +14,7 @@ public class CasseBrique extends Canvas implements KeyListener {
     public ArrayList<Balle> listeBalle = new ArrayList<>();
     public ArrayList<Brique> listeBrique = new ArrayList<>();
     public Barre barre;
+    public Bonus bonus;
 
     public static final int LARGEUR = 500;
     public static final int HAUTEUR = 700;
@@ -98,8 +96,6 @@ public class CasseBrique extends Canvas implements KeyListener {
                 barre.deplacerBarreG();
             }
 
-            barre.dessiner(dessin);
-
             for(Brique brique : listeBrique) {
                 brique.dessiner(dessin);
                 for (Balle balle : listeBalle){
@@ -107,7 +103,21 @@ public class CasseBrique extends Canvas implements KeyListener {
                             brique.getX(), brique.getY(), brique.getLargeurDefaut(), brique.getHauteurDefaut())) {
 
                         balle.setVitesseY(-balle.getVitesseY());
-                        balle.setY(brique.getY() + balle.getDiametre());
+
+                        if (Bonus.bonus() == 9){
+                            if (Bonus.bonus() < 5){
+                                barre.setLargeurDefaut(300);
+                            }else{
+                                barre.setLargeurDefaut(100);
+                            }
+                        }
+                        if (Bonus.bonus() == 8){
+                            if (Bonus.bonus() < 5){
+                                barre.setVitesse(10);
+                            }else{
+                                barre.setVitesse(2);
+                            }
+                        }
                     }
 
                 }
@@ -124,6 +134,9 @@ public class CasseBrique extends Canvas implements KeyListener {
                     }
                 }
             }
+
+
+            barre.dessiner(dessin);
 
             dessin.dispose();
             this.getBufferStrategy().show();
