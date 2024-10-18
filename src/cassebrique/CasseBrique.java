@@ -3,6 +3,7 @@ package cassebrique;
 import cassebrique.models.Balle;
 import cassebrique.models.Barre;
 import cassebrique.models.Brique;
+import cassebrique.models.Collisions;
 
 import javax.swing.*;
 import java.awt.*;
@@ -50,9 +51,9 @@ public class CasseBrique extends Canvas implements KeyListener {
     public void lancerUnePartie() throws InterruptedException {
 
         listeBalle = new ArrayList<>();
-        listeBalle.add(new Balle(100,100,3,4));
-        listeBalle.add(new Balle(200,100,2,3));
-        listeBalle.add(new Balle(100,200,1,2));
+        listeBalle.add(new Balle(250,450,3,4));
+        listeBalle.add(new Balle(250,450,2,3));
+        listeBalle.add(new Balle(250,450,1,2));
 
         barre = new Barre(
                 CasseBrique.LARGEUR / 2 - Barre.largeurDefaut / 2,
@@ -84,6 +85,9 @@ public class CasseBrique extends Canvas implements KeyListener {
             for(Balle balle : listeBalle) {
                 balle.deplacer();
                 balle.dessiner(dessin);
+                if (Collisions.Col(balle.getX(), balle.getY(), balle.getDiametre(), balle.getDiametre(),
+                        barre.getX(), barre.getY(), barre.getLargeurDefaut(), barre.getHauteurDefaut())) {
+                    balle.setVitesseY(-balle.getVitesseY());}
             }
 
             if (toucheDroite){
@@ -97,6 +101,13 @@ public class CasseBrique extends Canvas implements KeyListener {
 
             for(Brique brique : listeBrique) {
                 brique.dessiner(dessin);
+                for (Balle balle : listeBalle){
+                    if (Collisions.Col(balle.getX(), balle.getY(), balle.getDiametre(), balle.getDiametre(),
+                            brique.getX(), brique.getY(), brique.getLargeurDefaut(), brique.getHauteurDefaut())) {
+                        balle.setVitesseY(-balle.getVitesseY());
+                    }
+
+                }
             }
 
             dessin.dispose();
